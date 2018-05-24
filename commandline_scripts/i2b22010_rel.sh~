@@ -1,0 +1,64 @@
+# copied from /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/i2b22010_code/commandline_scripts/nov102016_i2b22010_rel_withgroundtags_onemodel_10fold_sentencelevel.sh
+python bidirectional_lstm_i2b22010_rel_onemodel_sentencelevel.py \
+--max_features 160380 \
+--vocab_size 160380 \
+--maxlen 30 \
+--embedding_size 84 \
+--pretrained_embedding_size 40 \
+--embedding  \
+--filter_length 8 \
+--nb_filter 10 \
+--pool_length 4 \
+--lstm_output_size 64 \
+--num_hidden_layers 32 \
+--batch_size 30 \
+--nb_epoch 20 \
+--max_charlen 20 \
+--char_vocab_size 100 \
+--char_embedding_size 50 \
+--ngram_vocab_file '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/thyme_ngram_vocab.txt' \
+--num_of_ngram 3 \
+--conceptfield 13 \
+--tagfield 14 \
+--testconceptfield 14 \
+--testtagfield 15 \
+--word2vecFile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/i2b22010_clef2013_clef2014_thyme_MIMICIII.txt_cleaned_glove.op_40.txt' \
+--train_crfFeaturesFile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/i2b22010_deepnltrainFeaturesFile_features_concept_rel_med_sample' \
+--test_crfFeatures_dir '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_op' \
+--output_crfFeatures_dir '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials' \
+--modelfile 'models/nov102016_bidirectional_lstm_ner_categorical.embedded.model.h5.i2b22010.rel_withgroundtags_trails' \
+--posfile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/word2VecFiles/posTags.txt' \
+--chunkfile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/word2VecFiles/chunkTags.txt' \
+--suffile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/word2VecFiles/suffixes.txt' \
+--prefile '/home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/finaldata/word2VecFiles/prefixes.txt' \
+--gazetterfile '/home/raghavendra/BackUP/MyWorks/workspace/TemporalMining/THYMEWorkingDir/semeval2016/thyme.train.gazetter.lst' \
+--train \
+--pos \
+--sentencelevelfeatures \
+--pos \
+--chunk \
+--cap  \
+--gazetter \
+--suf \
+--pre \
+--others
+#boolean 
+# --pos \
+# --chunk \
+# --cap  \
+# --gazetter \
+# --suf \
+# --pre \
+# --include_chars \
+# --include_char_ngram_hash \
+#--withgroundtags \
+
+cd /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse
+
+#convert features to pipe
+
+java -cp bin:lib/*:. edu.iiit.cde.i2b22010.i2b22010FeaturesToPipeConverter -IIITformat -convertconfeaturestopipe -convertrelfeaturestopipe -corpusdir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/test_txt -inputfeaturesdir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials -outputconceptsdir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_condir -outputrelationsdir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_reldir -withgroundtags -goldconceptsdir finaldata/i2b22010Dataset/10fold/test/concept_new
+
+java -cp bin:lib/*:. edu.iiit.cde.i2b22010.i2b22010Evaluator -IIITformat -i2b22010coneval -i2b22010releval -goldcondir finaldata/i2b22010Dataset/10fold/test/concept_new -goldreldir finaldata/i2b22010Dataset/10fold/test/rel_new -predcondir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_condir -predreldir /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_reldir -resultfile /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_eval -withgroundtags
+
+cat /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/IIIT_mti_rl_dl_code/resources/jan302017_deepnlTestFeatureFiles_i2b22010_features_concept_med_rel_onemodel_op_withpredicttags_trials_eval
