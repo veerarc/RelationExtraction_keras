@@ -28,6 +28,6 @@ File Contents:
 
 Running scripts:
 ===================================
-> i2b22010_ner.sh : script to run medical term identification (bidirectional_lstm_ner.py) code.\\
+> i2b22010_ner.sh : script to run medical term identification (bidirectional_lstm_ner.py) code.</br>
 > i2b22010_rel.sh : script to run relation extraction (bidirectional_lstm_rel.py) code.
 
