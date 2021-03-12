@@ -1,4 +1,4 @@
-#Bidirectional LSTM for Medical Relation Extraction task
+# Bidirectional LSTM for Medical Relation Extraction task
 
 Mining relationships between treatment(s) and medical problem(s) is vital in the biomedical domain. This helps in various applications, such as decision support system, safety surveillance, and new treatment discovery. We build a deep learning approach that utilizes both word level and sentence-level representations to extract the relationships between treatment and problem.
 
