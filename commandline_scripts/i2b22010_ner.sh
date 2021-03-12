@@ -1,4 +1,3 @@
-cd /home/raghavendra/BackUP/MyWorks/workspace/IIIT2016Eclipse/bmner/thyme_code_oct2016
 python bidirectional_lstm_ner_categorical.py \
 --max_features 160380 \
 --vocab_size 160380 \
